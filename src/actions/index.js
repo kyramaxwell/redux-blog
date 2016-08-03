@@ -7,9 +7,7 @@ const API_KEY = '?key=k_maxwell';
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
-  // CREATE_POST: 'CREATE_POST',
-  // UPDATE_POST: 'UPDATE_POST',
-  // DELETE_POST: 'DELETE_POST',
+  UPDATE_POST: 'UPDATE_POST',
 };
 
 
@@ -36,7 +34,7 @@ export function fetchPost(id) {
 export function createPost(post) {
   return (dispatch) => {
     const fields = { title: post.title, tags: post.tags, content: post.content };
-    axios.post(`${ROOT_URL}/posts/${API_KEY}`, { fields }).then(response => {
+    axios.post(`${ROOT_URL}/posts/${API_KEY}`, fields).then(response => {
       browserHistory.push('/');
     }).catch(error => {
       console.log(error);
@@ -46,8 +44,10 @@ export function createPost(post) {
 
 export function updatePost(post) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts/${post.id}${API_KEY}`, post).then(response => {
-      console.log(response);
+    const fields = { title: post.title, tags: post.tags, content: post.content };
+    axios.put(`${ROOT_URL}/posts/${post.id}${API_KEY}`, fields).then(response => {
+      dispatch({ type: 'UPDATE_POST', payload: response.data });
+      location.reload();
     }).catch(error => {
       console.log(error);
     });

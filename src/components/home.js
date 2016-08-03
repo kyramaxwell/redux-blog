@@ -10,19 +10,10 @@ class Home extends Component {
     // init component state here
     this.state = {
     };
-    this.deleteAll = this.deleteAll.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchPosts();
-  }
-
-  deleteAll() {
-    this.props.posts.map = this.props.post.map.bind(this);
-    this.props.posts.map((post) => {
-      this.props.deletePost(post.id);
-      return null;
-    });
   }
 
   render() {

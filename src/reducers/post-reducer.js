@@ -17,6 +17,11 @@ const PostReducer = (state = posts, action) => {
         all: state.all,
         current: action.payload,
       };
+    case ActionTypes.UPDATE_POST:
+      return {
+        all: state.all,
+        current: action.payload,
+      };
     default:
       return state;
   }

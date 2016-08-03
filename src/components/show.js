@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as actions from '../actions';
 import Textarea from 'react-textarea-autosize';
+import marked from 'marked';
 
 
 class Show extends Component {
@@ -27,9 +28,10 @@ class Show extends Component {
     this.props.deletePost(this.props.params.id);
   }
 
-  onSubmit() {
+  onSubmit(event) {
+    event.preventDefault();
     const post = {
-      id: this.props.current.id,
+      id: this.props.current._id,
       title: this.state.title,
       tags: this.state.tags,
       content: this.state.content,
@@ -59,7 +61,7 @@ class Show extends Component {
         <div id="note-display">
           <h1>{this.props.current.title}</h1>
           <h2>{this.props.current.tags}</h2>
-          <p>{this.props.current.content}</p>
+          <div dangerouslySetInnerHTML={{ __html: marked(this.props.current.content || '') }} />
           <div id="icons">
             <i className="fa fa-pencil fa-2x" onClick={() => {
               this.setState({

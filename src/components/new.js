@@ -16,7 +16,8 @@ class New extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit() {
+  onSubmit(event) {
+    event.preventDefault();
     const post = {
       title: this.state.title,
       tags: this.state.tags,
