@@ -47,7 +47,7 @@ export function updatePost(post) {
     const fields = { title: post.title, tags: post.tags, content: post.content };
     axios.put(`${ROOT_URL}/posts/${post.id}${API_KEY}`, fields).then(response => {
       dispatch({ type: 'UPDATE_POST', payload: response.data });
-      browserHistory.push('/');
+      location.reload();
     }).catch(error => {
       console.log(error);
     });
