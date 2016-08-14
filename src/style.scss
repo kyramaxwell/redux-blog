@@ -31,6 +31,28 @@ body {
     color: darken(blue, 20%);
     border: 0;
   }
+
+  #signout {
+    font-size: 16px;
+    padding: 7px;
+    background: darken(white, 10%);
+    border-radius: .25rem;
+    color: darken(blue, 20%);
+    border: 0;
+  }
+
+  #logins {
+    margin-top: 7px;
+    #signin, #signup {
+      padding: 7px;
+      background: darken(white, 10%);
+      border-radius: .25rem;
+      color: darken(blue, 20%);
+      border: 0;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
 }
 
 ul {

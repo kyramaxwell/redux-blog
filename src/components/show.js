@@ -60,20 +60,31 @@ class Show extends Component {
       return (
         <div id="note-display">
           <h1>{this.props.current.title}</h1>
+          <h2>Author: {this.props.current.author}</h2>
           <h2>{this.props.current.tags}</h2>
           <div dangerouslySetInnerHTML={{ __html: marked(this.props.current.content || '') }} />
-          <div id="icons">
-            <i className="fa fa-pencil fa-2x" onClick={() => {
-              this.setState({
-                editing: true,
-                title: this.props.current.title,
-                tags: this.props.current.tags,
-                content: this.props.current.content,
-              }); }}></i>
-            <i className="fa fa-trash-o fa-2x" onClick={this.onDelete}></i>
-          </div>
+          {this.renderIcons()}
         </div>
     );
+    }
+  }
+
+  renderIcons() {
+    if (this.props.auth && !this.state.editing) {
+      return (
+        <div id="icons">
+          <i className="fa fa-pencil fa-2x" onClick={() => {
+            this.setState({
+              editing: true,
+              title: this.props.current.title,
+              tags: this.props.current.tags,
+              content: this.props.current.content,
+            }); }}></i>
+          <i className="fa fa-trash-o fa-2x" onClick={this.onDelete}></i>
+        </div>
+      );
+    } else {
+      return null;
     }
   }
 
@@ -91,6 +102,7 @@ class Show extends Component {
 const mapStateToProps = (state) => (
   {
     current: state.posts.current,
+    auth: state.auth.authenticated,
   }
 );
 
